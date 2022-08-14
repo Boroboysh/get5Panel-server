@@ -3,12 +3,17 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+
+
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::get('/download/', [\App\Http\Controllers\DownloadController::class, 'download']);
 
+/*Route::middleware(['cors'])->group(function () {
+
+});*/
 
 /*post*/
 Route::post('/config/new', function (Request $req){
