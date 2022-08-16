@@ -2,80 +2,36 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-
+use Reflex\Rcon\Rcon;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/download/', [\App\Http\Controllers\DownloadController::class, 'download']);
-
-/*Route::middleware(['cors'])->group(function () {
-
-});*/
-
-/*post*/
 Route::post('/config/new', function (Request $req){
     $match = $req->all();
 
-
-    /*$match = (object) [
-        "matchid" => "23",
-        "num_maps" => 3,
-        "spectators" => (object)[
-            "players" => [
-                "STEAM_1:1:.....",
-                "STEAM_1:2:.....",
-                "STEAM_1:3:....."
-            ]
-        ],
-        "skip_veto" => 0,
-        "veto_first" => "team1",
-        "side_type" => "standard",
-        "maplist" => [
-            "de_dust2",
-            "de_inferno",
-            "de_mirage",
-            "de_nuke",
-            "de_overpass",
-            "de_train",
-        ],
-        "players_per_team" => 5,
-        "coaches_per_team" => 2,
-        "min_players_to_ready" => 1,
-        "mit_spectators_to_ready" => 0,
-        "team1" => (object) [
-            "name" => "Navi",
-            "tag" => "Navi",
-            "flag" => "RU",
-            "logo" => "nv",
-            "players" => (object) [
-                "STEAM_0:1:52245092" =>"splewis"
-            ]
-        ],
-        "team2" => (object) [
-            "name" => "Fnatic",
-            "tag" => "fnatic",
-            "flag" => "SE",
-            "logo" => "fntc",
-            "players" => (object) [
-                "STEAM_1:1:46796472" => "",
-                "STEAM_1:0:78189799" => "",
-                "STEAM_1:0:142982" => "",
-            ]
-        ]
-    ];*/
-    /*$match = (object)[
-        "name" => $name
-    ];*/
     $json = json_encode($match);
 
-    $path = public_path('match_cfg/match.json');
+    $path = public_path('match_cfg/' .$req->input("matchid") .".json");
 
-    file_put_contents("match.json", $json);
+    file_put_contents($req->input("matchid") .".json", $json);
 
-    rename("match.json", $path);
+    rename($req->input("matchid") .".json", $path);
 
     return response('All okay', 200);
+});
+
+Route::get('/rcon/status', function () {
+    $server_ip = "217.116.52.85";
+    $server_port = 27115;
+    $server_pass = "89829817111";
+
+    $rcon =  new Rcon($server_ip, $server_port, $server_pass);
+    $rcon->connect();
+
+    $rcon->exec('bot_add_ct');
+    $response = $rcon->exec('status');
+
+    return compact('response');
 });
