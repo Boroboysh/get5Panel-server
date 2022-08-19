@@ -1,0 +1,23 @@
+{
+    "matchid": "revo",
+    "num_maps": 5,
+    "maplist": [
+        "de_dust2",
+        "de_inferno",
+        "de_mirage",
+        "de_nuke",
+        "de_overpass"
+    ],
+    "team1": {
+        "name": "Кошки",
+        "players": [
+            "76561199209037103"
+        ]
+    },
+    "team2": {
+        "name": "Собаки",
+        "players": [
+            "76561199238352193"
+        ]
+    }
+}

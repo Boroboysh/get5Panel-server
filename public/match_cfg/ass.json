@@ -1,0 +1,21 @@
+{
+    "matchid": "ass",
+    "num_maps": 3,
+    "maplist": [
+        "de_inferno",
+        "de_mirage",
+        "de_dust2"
+    ],
+    "team1": {
+        "name": "Strax",
+        "players": [
+            "76561199209037103"
+        ]
+    },
+    "team2": {
+        "name": "StraxaNet",
+        "players": [
+            "76561199238352193"
+        ]
+    }
+}

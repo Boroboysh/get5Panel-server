@@ -1,0 +1,21 @@
+{
+    "matchid": "nice",
+    "num_maps": 3,
+    "maplist": [
+        "de_dust2",
+        "de_inferno",
+        "de_mirage"
+    ],
+    "team1": {
+        "name": "Моргенштерновцы",
+        "players": [
+            "76561199209037103"
+        ]
+    },
+    "team2": {
+        "name": "СлаваБебровцы",
+        "players": [
+            "76561199238352193"
+        ]
+    }
+}
