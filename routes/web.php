@@ -15,8 +15,8 @@ Route::get('/configList', function () {
 
     $count = 0;
 
-    while($file = readdir($dir)){
-        if($file == '.' || $file == '..' || is_dir('path/to/dir' . $file)){
+    while ($file = readdir($dir)) {
+        if ($file == '.' || $file == '..' || is_dir('path/to/dir' . $file)) {
             continue;
         }
         $count++;
@@ -26,8 +26,8 @@ Route::get('/configList', function () {
     return $files;
 });
 
-Route::get('/configList/{cfg}', function ($filename){
-    return 'Имя файла:' .$filename;
+Route::get('/configList/{cfg}', function ($filename) {
+    return 'Имя файла:' . $filename;
 });
 
 Route::get('/rcon/status', function () {
@@ -46,7 +46,7 @@ Route::get('/rcon/currentMatch', function () {
     $server_pass = "89829817111";
 
     $status_json = (new App\Models\RconCsGo)->status($server_ip, $server_port, $server_pass);
-    $response =json_decode( preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $status_json), true );;
+    $response = json_decode(preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $status_json), true);;
 
     return $response['matchid'];
 });
@@ -92,7 +92,7 @@ Route::post('/register', function (Request $req) {
     // steamid, nickname, password, avatar, currentTeam
     $steamid = $req->input("steamid");
     $nickname = $req->input("nickname");
-    $password= $req->input("password");
+    $password = $req->input("password");
     $avatar = $req->input("avatar");
     $currentTeam = $req->input("currentTeam");
 
@@ -103,20 +103,17 @@ Route::post('/register', function (Request $req) {
         'avatar' => $avatar,
         'currentTeam' => $currentTeam,
     ]);
-  /*
-    if (Schema::hasColumn('users', 'steamid')) {
-        return response('User already exists');
-    } else {
+    /*
+      if (Schema::hasColumn('users', 'steamid')) {
+          return response('User already exists');
+      } else {
 
-    }*/
+      }*/
 
     return response('User created', 200);
 });
 
-Route::post('/login', function (Request $req) {
-
-});
-
+Route::get('login', [\App\Http\Controllers\SteamAuthController::class, 'login']);
 
 Route::get('/db', function () {
 
