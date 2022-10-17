@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 use Nette\Schema\Schema;
 use Reflex\Rcon\Rcon;
 
@@ -88,32 +89,7 @@ Route::post('/config/new', function (Request $req) {
     return response('Ok', 200);
 });
 
-Route::post('/register', function (Request $req) {
-    // steamid, nickname, password, avatar, currentTeam
-    $steamid = $req->input("steamid");
-    $nickname = $req->input("nickname");
-    $password = $req->input("password");
-    $avatar = $req->input("avatar");
-    $currentTeam = $req->input("currentTeam");
-
-    \App\Models\User::create([
-        'steamid' => $steamid,
-        'nickname' => $nickname,
-        'password' => $password,
-        'avatar' => $avatar,
-        'currentTeam' => $currentTeam,
-    ]);
-    /*
-      if (Schema::hasColumn('users', 'steamid')) {
-          return response('User already exists');
-      } else {
-
-      }*/
-
-    return response('User created', 200);
-});
-
-Route::get('login', [\App\Http\Controllers\SteamAuthController::class, 'login']);
+Route::get('/login', [\App\Http\Controllers\SteamAuthController::class, 'login']);
 
 Route::get('/db', function () {
 

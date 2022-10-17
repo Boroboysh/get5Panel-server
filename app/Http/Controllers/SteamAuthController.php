@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use http\Env\Request;
 use Illuminate\Support\Facades\Auth;
 use Ilzrv\LaravelSteamAuth\SteamAuth;
 use Ilzrv\LaravelSteamAuth\SteamData;
@@ -16,13 +17,12 @@ class SteamAuthController extends Controller
      * @var SteamAuth
      */
     protected SteamAuth $steamAuth;
-
     /**
      * Куда перенаправлять пользователей после входа в систему.
      *
      * @var string
      */
-    protected string $redirectTo = RouteServiceProvider::HOME;
+    protected string $redirectTo = RouteServiceProvider::FRONTEND   ;
 
     /**
      * Куда перенаправлять пользователей после конструктора loginSteamAuthController.
@@ -56,7 +56,12 @@ class SteamAuthController extends Controller
             true
         );
 
-        return redirect($this->redirectTo);
+        session()->regenerate();
+
+        $remember_token = User::select('remember_token')->where('steamid', $data->getSteamId())->get();
+        $array = $remember_token[0];
+
+        return redirect('http://localhost:3000/auth/' .$array);
     }
 
 
@@ -68,6 +73,8 @@ class SteamAuthController extends Controller
      */
     protected function firstOrCreate(SteamData $data): \Illuminate\Database\Eloquent\Model|User
     {
+        session(['steamid' => $data->getSteamId()]);
+
         return User::firstOrCreate([
             'steamid' => $data->getSteamId(),
         ], [

@@ -22,6 +22,6 @@
         </style>
     </head>
     <body class="antialiased">
-      <h2>Welcome</h2>
+      <h2>Login page</h2>
     </body>
 </html>

@@ -18,6 +18,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/configList';
+    public const FRONTEND = 'http://localhost:3000/';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
