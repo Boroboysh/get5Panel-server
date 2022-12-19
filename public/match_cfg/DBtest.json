@@ -9,7 +9,7 @@
         "de_overpass"
     ],
     "team1": {
-        "name": "Zalupa",
+        "name": "Test1",
         "players": [
             "88888888",
             "888888888",
@@ -24,7 +24,7 @@
         ]
     },
     "team2": {
-        "name": "Pizda",
+        "name": "Test2",
         "players": [
             "11111111",
             "111111111",
