@@ -23,9 +23,9 @@ class RconCsGo extends Model
      * @throws RconAuthException
      * @throws NotAuthenticatedException
      */
-    public function startMatch($ip, $port, $pass, $filename)
+    public function startMatch($ip, $port, $password, $filename)
     {
-        $rcon = new Rcon($ip, $port, $pass);
+        $rcon = new Rcon($ip, $port, $password);
         $rcon->connect();
 
         /*http://109.194.163.83:8000*/
@@ -38,8 +38,8 @@ class RconCsGo extends Model
      * @throws RconConnectException
      * @throws NotAuthenticatedException
      */
-    public function endMatch ($ip, $port, $pass) {
-        $rcon = new Rcon($ip, $port, $pass);
+    public function endMatch ($ip, $port, $password) {
+        $rcon = new Rcon($ip, $port, $password);
         $rcon->connect();
 
         $rcon->exec('get5_endmatch');
@@ -50,9 +50,9 @@ class RconCsGo extends Model
      * @throws RconAuthException
      * @throws NotAuthenticatedException
      */
-    public function status($ip, $port, $pass)
+    public function status($ip, $port, $password)
     {
-        $rcon = new Rcon($ip, $port, $pass);
+        $rcon = new Rcon($ip, $port, $password);
         $rcon->connect();
 
         return $rcon->exec('get5_status');
